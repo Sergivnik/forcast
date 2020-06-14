@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Forcast</string>
+    <string name="forcast">Forcast</string>
+    <string name="_25_c">25° C</string>
+    <string name="taganrog">Taganrog</string>
+</resources>

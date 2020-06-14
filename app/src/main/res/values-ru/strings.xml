@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="forcast">Прогноз погоды</string>
+    <string name="taganrog">Таганрог</string>
+    <string name="_25_c">25° C</string>
+</resources>
