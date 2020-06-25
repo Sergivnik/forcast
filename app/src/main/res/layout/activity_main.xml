@@ -86,7 +86,8 @@
         app:layout_constraintTop_toBottomOf="@+id/textView3"
         android:scaleType="center"
         app:srcCompat="@drawable/taganrog1"
-        tools:layout_editor_absoluteX="0dp" />
+        tools:layout_editor_absoluteX="0dp"
+        tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/button2"

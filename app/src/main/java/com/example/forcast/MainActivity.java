@@ -90,7 +90,9 @@ public class MainActivity extends AppCompatActivity implements Constants {
     }
 
     public void onClick1(View view) {
-        Uri uri = Uri.parse("https://ru.wikipedia.org/wiki/%D0%A2%D0%B0%D0%B3%D0%B0%D0%BD%D1%80%D0%BE%D0%B3");
+        TextView city=findViewById(R.id.textView3);
+        String url=city.getText().toString();
+        Uri uri = Uri.parse("https://wikipedia.org/wiki/"+url);
         Intent browser= new Intent(Intent.ACTION_VIEW, uri);
         startActivity(browser);
     }
