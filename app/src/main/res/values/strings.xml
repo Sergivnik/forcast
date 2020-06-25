@@ -3,4 +3,5 @@
     <string name="forcast">Forcast</string>
     <string name="_25_c">25° C</string>
     <string name="taganrog">Taganrog</string>
+    <string name="demoLifeCycle">Демонстрация жизненного цикла Activity</string>
 </resources>
