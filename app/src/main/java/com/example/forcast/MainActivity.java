@@ -2,17 +2,22 @@ package com.example.forcast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Browser;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Objects;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements Constants {
 
-    private String message;
-    private String temperature;
+    public String city;
+    public String temperature;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,18 +31,21 @@ public class MainActivity extends AppCompatActivity {
             instanceState = "Повторный запуск!";
         }
         Toast.makeText(getApplicationContext(), instanceState + " - onCreate()", Toast.LENGTH_SHORT).show();
+        Bundle arguments = getIntent().getExtras();
+        if(arguments!=null){
+            String city = Objects.requireNonNull(arguments.get("city")).toString();
+            TextView textView = findViewById(R.id.textView3);
+            textView.setText(city);
+            String temperature = Objects.requireNonNull(arguments.get("temperature")).toString();
+            TextView textView1 = findViewById(R.id.textView);
+            textView1.setText(temperature+"° C");
+        }
     }
 
     @Override
     protected void onRestoreInstanceState(Bundle saveInstanceState){
         super.onRestoreInstanceState(saveInstanceState);
         Toast.makeText(getApplicationContext(), "Повторный запуск!! - onRestoreInstanceState()", Toast.LENGTH_SHORT).show();
-        message = saveInstanceState.getString("City");
-        TextView textView = (TextView) findViewById(R.id.textView3);
-        textView.setText(((String)message).toString());
-        temperature = saveInstanceState.getString("Temperature");
-        TextView textView1 = (TextView) findViewById(R.id.textView);
-        textView1.setText(((String)temperature).toString());
     }
 
     @Override
@@ -56,8 +64,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onSaveInstanceState(Bundle saveInstanceState){
         super.onSaveInstanceState(saveInstanceState);
         Toast.makeText(getApplicationContext(), "onSaveInstanceState()", Toast.LENGTH_SHORT).show();
-        saveInstanceState.putString("City",message);
-        saveInstanceState.putString("Temperature",temperature);
     }
 
     @Override
@@ -77,19 +83,17 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), "onDestroy()", Toast.LENGTH_SHORT).show();
     }
 
-    public void sendMessage(View view) {
-        EditText editText = (EditText) findViewById(R.id.edit_message);
-        message = editText.getText().toString();
-        EditText editText1 = (EditText) findViewById(R.id.edit_message2);
-        temperature=editText1.getText().toString();
-        temperature=temperature+"° C";
-        setContentView(R.layout.activity_main);
-        TextView textView = (TextView) findViewById(R.id.textView);
-        textView.setText(temperature);
-        TextView textView1 = (TextView) findViewById(R.id.textView3);
-        textView1.setText(message);
+    public void onClick (View view){
+        Intent intent = new Intent(this, choiseCity.class);
+        //finish();
+        startActivity(intent);
     }
-    public void changeCity(View view) {
-        setContentView(R.layout.choise_city);
+
+    public void onClick1(View view) {
+        TextView city=findViewById(R.id.textView3);
+        String url=city.getText().toString();
+        Uri uri = Uri.parse("https://wikipedia.org/wiki/"+url);
+        Intent browser= new Intent(Intent.ACTION_VIEW, uri);
+        startActivity(browser);
     }
 }
